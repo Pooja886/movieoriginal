@@ -1,0 +1,49 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const apiKey = 'YOUR_API_KEY';
+  const popularMovieUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`;
+  const trendingMovieUrl = `https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}`;
+
+  // Fetch popular movie data from the API
+  fetch(popularMovieUrl)
+    .then(response => response.json())
+    .then(data => {
+      const top3PopularMovies = data.results.slice(0, 3);
+      displayTop3PopularMovies(top3PopularMovies);
+    })
+    .catch(err => console.error(err));
+
+  // Fetch trending movie data from the API
+  fetch(trendingMovieUrl)
+    .then(response => response.json())
+    .then(data => {
+      displayMovies(data.results);
+    })
+    .catch(err => console.error(err));
+});
+
+function displayTop3PopularMovies(movies) {
+  const topPopularMovieCarousel = document.getElementById('topPopularMovieCarousel');
+  const carouselInner = topPopularMovieCarousel.querySelector('.carousel-inner');
+
+  for (let i = 0; i < movies.length; i++) {
+    const moviePosterPath = movies[i].poster_path;
+    const carouselItem = document.createElement('div');
+    carouselItem.classList.add('carousel-item');
+    if (i === 0) {
+      carouselItem.classList.add('active');
+    }
+
+    const img = document.createElement('img');
+    img.classList.add('d-block', 'w-100');
+    img.src = `https://image.tmdb.org/t/p/w500${moviePosterPath}`;
+    img.alt = `Popular Movie ${i + 1}`;
+
+    carouselItem.appendChild(img);
+    carouselInner.appendChild(carouselItem);
+  }
+
+  // Initialize the carousel with automatic sliding
+  $('#topPopularMovieCarousel').carousel({
+    interval: 3000 // 3 seconds interval for automatic sliding
+  });
+}
