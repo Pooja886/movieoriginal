@@ -95,6 +95,7 @@ function createMovieCard(movie)
 { const movieCard = document.createElement("div");
    movieCard.classList.add("card", "col-sm-6", "col-md-4", "col-lg-3"); 
    movieCard.dataset.movieId = movie.id;
+   
 
    const image = document.createElement("img");
    image.classList.add("card-img-top");
@@ -107,6 +108,7 @@ function createMovieCard(movie)
    cardBody.classList.add("card-body"); 
    
    const title = document.createElement("h5"); 
+   title.style.color = "white"
    title.classList.add("card-title"); 
    title.textContent = movie.title; 
    cardBody.appendChild(title); 
@@ -114,7 +116,7 @@ function createMovieCard(movie)
    const rating = document.createElement("p")
    rating.classList.add("card-rate");
    
-   rating.textContent = "Rating:" + movie.vote_average;
+   rating.textContent = "Rating:"+ " " +movie.vote_average;
    cardBody.appendChild(rating);
    
 //    const overview = document.createElement("p"); 
@@ -137,6 +139,7 @@ function createMovieCard(movie)
 
 
    const releaseDate = document.createElement("p");
+   releaseDate.style.color = "white"
    releaseDate.classList.add("card-text");
    releaseDate.textContent = movie.release_date;
    cardBody.appendChild(releaseDate);

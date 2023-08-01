@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Function to create different movie card design for the search result page
   function createDifferentMovieCard(movie) {
     const movieCard = document.createElement("div");
-    movieCard.classList.add("movie-card");
+    movieCard.classList.add("movie-card" );
   
     const image = document.createElement("img");
     image.classList.add("movie-image");
