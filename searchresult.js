@@ -1,5 +1,3 @@
-// searchresult.js
-
 document.addEventListener('DOMContentLoaded', () => {
     // Retrieve the search term from the query parameter
     const urlParams = new URLSearchParams(window.location.search);

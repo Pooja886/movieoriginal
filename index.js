@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const api_url = base_url + "/trending/all/day?" + access_key;
    const popularMovieUrl = base_url + "/movie/popular?" + access_key;
 
-    // Fetch popular movie data from the API
+// Fetch popular movie data from the API
    fetch(popularMovieUrl)
   .then(response => response.json())
   .then(data => {
@@ -11,19 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   })
   .catch(err => console.error(err));
-    // Fetch and display trending movies on page load
+// Fetch and display trending movies on page load
     fetch(api_url, options)
       .then(response => response.json())
       .then(data => {
-        displayMovies(data.results  , 'sliderMovieCards');
+      displayMovies(data.results  , 'sliderMovieCards');
       })
       .catch(err => console.error(err));
 
-       // Fetch popular movie data from the API
+// Fetch popular movie data from the API
     fetch(popularMovieUrl ,options)
    .then(response => response.json())
    .then(data => {
-     displayMovies(data.results  , 'popularMovieCards');
+  displayMovies(data.results  , 'popularMovieCards');
  
    })
    .catch(err => console.error(err));
@@ -90,7 +90,7 @@ function displayMovies(movies ,containerId ){
     });
    
 }
-
+// function to create movie cards
 function createMovieCard(movie) 
 { const movieCard = document.createElement("div");
    movieCard.classList.add("card", "col-sm-6", "col-md-4", "col-lg-3"); 
@@ -116,27 +116,8 @@ function createMovieCard(movie)
    const rating = document.createElement("p")
    rating.classList.add("card-rate");
    
-   rating.textContent = "Rating:"+ " " +movie.vote_average;
+   rating.textContent = "Rating:"+ " " + movie.vote_average;
    cardBody.appendChild(rating);
-   
-//    const overview = document.createElement("p"); 
-//    overview.classList.add("card-text"); 
-//    overview.textContent = movie.overview; 
-//    cardBody.appendChild(overview); 
-// const overview = document.createElement("p");
-// overview.classList.add("card-text", "overview");
-// const overviewMaxLength = 150; // Maximum characters for the overview
-// if (movie.overview.length > overviewMaxLength) {
-//   overview.textContent = movie.overview.substring(0, overviewMaxLength) + '...';
-// } else {
-//   overview.textContent = movie.overview;
-// }
-// cardBody.appendChild(overview);
-
-
-
-
-
 
    const releaseDate = document.createElement("p");
    releaseDate.style.color = "white"
@@ -149,8 +130,6 @@ function createMovieCard(movie)
 
    return movieCard;
 }
-
-
 function displayTop3PopularMovies(movies) {
   const topPopularMovieCarousel = document.getElementById('topPopularMovieCarousel');
   const carouselInner = topPopularMovieCarousel.querySelector('.carousel-inner');
