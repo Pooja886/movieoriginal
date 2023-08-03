@@ -9,10 +9,49 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
-<body style="background-color: black">
+ <body style="background-color: white">
+ 
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+      <a class="navbar-brand"style="color: azure; cursor: pointer;"  href="index.html">TMDB</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" style="color: azure;"     aria-current="page" href="#">Movies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="color: azure;" href="#">Tv shows</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active"style="color: azure;"  aria-current="page" href="#">People</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="color: azure;" aria-current="page" href="#">More</a>
+          </li>
+       
+        </ul>
+        <div class="icons">
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search for a movie...">
+          <button id="searchButton">Search</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- navbarend -->
   <!-- Your HTML code for the search result page here -->
-  <h1 class="searchheader">Movie App - Search Results</h1>
+  <h1 id="searchheader"></h1>
+
   <div id="searchResultContainer" ></div>
+
+
+
+
 
   <script src="api.js"></script>
   <script src="searchresult.js"></script>

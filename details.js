@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     displayDetails(movieId);
     // Fetch the movie details, including the cast information
     function displayDetails(movieId) {
+ 
       // Fetch movie details
       const movieDetailsUrl = `${base_url}/movie/${movieId}?${access_key}`;
       fetch(movieDetailsUrl)
@@ -47,10 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Function to display the movie details
   function displayMovieDetails(movie, container) {
     // Create the HTML elements for displaying movie details
-    // Customize this based on the information you want to show
+    document.getElementById('header').innerHTML =  "Movie Details of "+ "" + "--" + "  " + movie.title;
+  
+    
     const movieDetails = document.createElement('div');
     movieDetails.innerHTML = `
-      <h2>${movie.title}</h2>
+    
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title} max-height="200px" width="200px">
       <p>${movie.overview}</p>
       <p>Release Date: ${movie.release_date}</p>
@@ -64,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // display cast 
   function displayCast(cast) {
-    // Sort the cast array (optional)
+    // Sort the cast array 
     const sortedCast = cast.sort((a, b) => a.order - b.order);
   
     // Display the top 10 cast members in the container

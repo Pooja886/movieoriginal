@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const api_url = base_url + "/trending/all/day?" + access_key;
    const popularMovieUrl = base_url + "/movie/popular?" + access_key;
 
+
 // Fetch popular movie data from the API
    fetch(popularMovieUrl)
   .then(response => response.json())
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
    })
    .catch(err => console.error(err));
   
+
     // Select the search input and search button elements
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
@@ -42,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = `searchresult.html?query=${encodeURIComponent(searchTerm)}`;
       }
     });
-   
   });
   
   
@@ -134,8 +135,11 @@ function displayTop3PopularMovies(movies) {
   const topPopularMovieCarousel = document.getElementById('topPopularMovieCarousel');
   const carouselInner = topPopularMovieCarousel.querySelector('.carousel-inner');
 
+
   for (let i = 0; i < movies.length; i++) {
     const moviePosterPath = movies[i].poster_path;
+ 
+
     const carouselItem = document.createElement('div');
     carouselItem.classList.add('carousel-item');
     if (i === 0) {

@@ -1,35 +1,83 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Retrieve the search term from the query parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchTerm = urlParams.get('query');
+  const urlParams = new URLSearchParams(window.location.search);
+  let searchTerm = urlParams.get('query');
+// Select the search input and search button elements
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+let currentPage = 1;
+let isLoading = false;
+
+
   
-    // If there's a search term, fetch the search results
-    if (searchTerm) {
-      const searchApiUrl = `${base_url}/search/movie?${access_key}&query=${encodeURIComponent(searchTerm)}`;
-  
-      // Fetch the search results
-      fetch(searchApiUrl, options)
+    searchInput.value = searchTerm;
+
+    function fetchSearchResults(page) {
+      console.log(searchTerm)
+      document.getElementById('searchheader').innerHTML = "Search Result For " + " " + searchTerm;
+      if (isLoading) return;
+      isLoading = true;
+      const searchApiUrl = `${base_url}/search/movie?${access_key}&query=${encodeURIComponent(searchTerm)}&page=${page}`;
+      
+      fetch(searchApiUrl)
         .then(response => response.json())
         .then(data => {
-          const searchResultContainer = document.getElementById('searchResultContainer');
-          // Clear the existing movie cards in the searchResultContainer
-          searchResultContainer.innerHTML = '';
-  
-          // Display the search results as different movie cards
-          data.results.forEach(movie => {
-            const movieCard = createDifferentMovieCard(movie);
-            searchResultContainer.appendChild(movieCard);
-          });
+          isLoading = false;
+          if (data.results.length > 0) {
+            data.results.forEach(movie => {
+              const movieCard = createDifferentMovieCard(movie);
+              searchResultContainer.appendChild(movieCard);
+              movieCard.addEventListener('click', () => {
+                const movieId = movieCard.dataset.movieId;
+                window.location.href = `details.html?movie_id=${movieId}`;
+              });
+            });
+            currentPage++;
+          }else{
+            if(page===1){
+              searchResultContainer.innerHTML=`<p>NO movies found.</p>`
+            }
+          }
+          
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+          isLoading = false;
+          console.error(err);
+        });
+
     }
-  });
+    searchButton.addEventListener('click', () => {
+      searchTerm = searchInput.value.trim();
+      if (searchTerm !== '') {
+        searchResultContainer.innerHTML = '';
+        currentPage = 1;
+        window.location.href = `searchresult.html?query=${encodeURIComponent(searchTerm)}`;
+        fetchSearchResults(currentPage);
+      }
+    });
   
+    window.addEventListener('scroll', () => {
+      const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+      const bottomReached = scrollTop + clientHeight >= scrollHeight - 200;
+      if (bottomReached) {
+        fetchSearchResults(currentPage);
+      }
+    });
+
+    fetchSearchResults(currentPage);
+    
+  });
+
+  
+  
+
+
+
   
   // Function to create different movie card design for the search result page
   function createDifferentMovieCard(movie) {
     const movieCard = document.createElement("div");
     movieCard.classList.add("movie-card" );
+    movieCard.dataset.movieId = movie.id;
   
     const image = document.createElement("img");
     image.classList.add("movie-image");
@@ -49,4 +97,3 @@ document.addEventListener('DOMContentLoaded', () => {
   
     return movieCard;
   }
-  
